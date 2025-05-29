@@ -1,0 +1,115 @@
+<div class="page-transition-wrapper">
+  <div class="calendar-container">
+    <h2 class="calendar-title">Calendario de Grandes Premios</h2>
+    <div *ngIf="loading" class="loading-indicator">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 6v2M12 16v2M6 12h2M16 12h2M7.5 7.5l1.4 1.4M15.1 15.1l1.4 1.4M7.5 16.5l1.4-1.4M15.1 8.9l1.4-1.4"></path>
+      </svg>
+      <p>Cargando carreras...</p>
+    </div>  <ul class="gp-list" *ngIf="!loading">
+    <li *ngFor="let gp of grandPrixList" class="gp-item" [class.past-race]="isPast(gp)">
+      <img class="gp-flag" [src]="getFlagUrl(gp.countryCode)" [alt]="gp.country + ' flag'" onerror="this.src='https://flagcdn.com/w40/xx.png'; this.onerror=null;" />
+      <div class="gp-info">
+        <span class="gp-name">{{ gp.name }}</span>
+        <span class="gp-country">{{ gp.country }}</span>
+        <span class="gp-date">{{ formatDate(gp.date) }}</span>
+        <span class="gp-status" [class.status-past]="isPast(gp)" [class.status-upcoming]="!isPast(gp)">
+          {{ isPast(gp) ? 'Disputado' : 'Pendiente' }}
+        </span>
+      </div>
+      <button class="gp-info-btn" (click)="showGPDetails(gp)">Detalles</button>
+    </li>
+  </ul>
+  <div class="gp-details-modal" *ngIf="selectedGP">
+    <div class="gp-details-content">
+      <button class="close-modal" (click)="closeGPDetails()">&times;</button>
+      <div class="modal-header">        <img class="modal-flag" [src]="getFlagUrl(selectedGP.countryCode)" [alt]="selectedGP.country + ' flag'" />
+        <h3>{{ selectedGP.name }}</h3>
+      </div>
+      <div class="modal-info">
+        <div class="info-row">
+          <span class="info-label">Circuito:</span>
+          <span class="info-value">{{ selectedGP.circuit }} ({{ selectedGP.location }}, {{ selectedGP.country }})</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Fecha:</span>
+          <span class="info-value">{{ formatDate(selectedGP.date) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Estado:</span>
+          <span class="info-value" [class.status-past]="isPast(selectedGP)" [class.status-upcoming]="!isPast(selectedGP)">
+            {{ isPast(selectedGP) ? 'Disputado' : 'Pendiente' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Sessions Schedule -->
+      <div class="sessions-section">
+        <h4>Horarios de Sesiones</h4>
+        <div class="session-grid">          <div *ngFor="let session of sessions" class="session-item">
+            <span class="session-name">{{ session.name }}</span>
+            <span class="session-date">{{ formatSessionDate(session.date) }}</span>
+            <span class="session-time">{{ formatTime(session.time) }}</span>
+          </div>
+        </div>
+      </div>
+        <!-- Results Section (only for past races) -->
+      <div class="results-section" *ngIf="isPast(selectedGP) && results && results.length > 0">
+        <h4>Resultados de la Carrera 2025</h4>
+        <div class="results-table">
+          <div class="results-header">
+            <div class="pos">Pos</div>
+            <div class="driver">Piloto</div>
+            <div class="team">Escudería</div>
+            <div class="points">Pts</div>
+          </div>
+          <div *ngFor="let result of results" class="result-row">
+            <div class="pos">{{ result.position }}</div>
+            <div class="driver">{{ result.driver }}</div>
+            <div class="team">{{ result.team }}</div>
+            <div class="points">{{ result.points }}</div>
+          </div>
+        </div>
+      </div>      <!-- Historical Results Section (for future races) -->
+      <div class="historical-section" *ngIf="!isPast(selectedGP) && allHistoricalResults && allHistoricalResults.length > 0">
+        <div class="historical-header">
+          <h4>Resultados Históricos - Top 5 (Últimos 4 Años)</h4>
+          <div class="year-selector">
+            <button 
+              class="year-btn" 
+              [class.active]="isAllYearsSelected()"
+              (click)="selectYear(null)">
+              Todos
+            </button>
+            <button 
+              *ngFor="let year of availableYears" 
+              class="year-btn" 
+              [class.active]="isYearSelected(year)"
+              (click)="selectYear(year)">
+              {{ year }}
+            </button>
+          </div>
+        </div>
+        <div *ngFor="let yearResult of historicalResults" class="year-results">
+          <h5>{{ yearResult.year }}</h5>
+          <div class="results-table historical">
+            <div class="results-header">
+              <div class="pos">Pos</div>
+              <div class="driver">Piloto</div>
+              <div class="team">Escudería</div>
+            </div>
+            <div *ngFor="let result of yearResult.top5" class="result-row">
+              <div class="pos">{{ result.position }}</div>
+              <div class="driver">{{ result.driver }}</div>
+              <div class="team">{{ result.team }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="no-data-message" *ngIf="isPast(selectedGP) && (!results || results.length === 0)">No hay datos de resultados disponibles.</div></div>
+    <div class="modal-backdrop" (click)="closeGPDetails()"></div>
+  </div>
+</div>
+</div>

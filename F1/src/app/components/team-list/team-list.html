@@ -1,0 +1,22 @@
+<div class="team-bg-car" *ngIf="backgroundCar">
+  <img [src]="backgroundCar" alt="Car background" />
+</div>
+<div class="teams-grid-select">
+  <div class="team-logo-box" *ngFor="let team of teams; let i = index">
+    <button class="team-logo-btn" (click)="toggleTeam(i)" [class.selected]="expanded === i">
+      <img [src]="team.logo" [alt]="(lang === 'es' ? team.name : team.nameEn) + ' logo'" class="team-logo animate-logo" />
+    </button>
+  </div>
+</div>
+<div class="team-details" *ngIf="expanded !== null">
+  <div class="team-details-header">
+    <img [src]="teams[expanded].logo" [alt]="(lang === 'es' ? teams[expanded].name : teams[expanded].nameEn) + ' logo'" class="team-logo-large" />
+    <h2 class="team-name-large">{{ lang === 'es' ? teams[expanded].name : teams[expanded].nameEn }}</h2>
+  </div>
+  <div class="drivers-list-large">
+    <div class="driver-card" *ngFor="let driver of teams[expanded].drivers">
+      <img [src]="driver.photo" [alt]="lang === 'es' ? driver.name : driver.nameEn" class="driver-photo animate-driver" />
+      <span class="driver-name">{{ lang === 'es' ? driver.name : driver.nameEn }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="navbar-container">
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">    <div class="navbar-left">
+      <button class="sidebar-toggle-btn" (click)="toggleFixedSidebar()" aria-label="Toggle sidebar" [class.active]="showFixedSidebar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect y="4" width="24" height="2" rx="1" fill="#fff"/>
+          <rect y="11" width="24" height="2" rx="1" fill="#fff"/>
+          <rect y="18" width="24" height="2" rx="1" fill="#fff"/>
+        </svg>
+      </button>
+      <img src="https://www.formula1.com/etc/designs/fom-website/images/f1_logo.svg" alt="F1 Logo" class="f1-logo" />
+      <span class="f1-title">F1 Tracker</span>
+      <div class="mobile-indicator">
+        <span class="sidebar-visibility-indicator" [class.visible]="showFixedSidebar"></span>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <button class="settings-btn" (click)="toggleMenu()" aria-label="Ajustes" [attr.aria-expanded]="showMenu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15.5C13.3807 15.5 14.5 14.3807 14.5 13C14.5 11.6193 13.3807 10.5 12 10.5C10.6193 10.5 9.5 11.6193 9.5 13C9.5 14.3807 10.6193 15.5 12 15.5Z" stroke="#fff" stroke-width="2"/>
+          <path d="M19.4 15A1.65 1.65 0 0 0 21 13.35V10.65A1.65 1.65 0 0 0 19.4 9L18.24 8.13A1.65 1.65 0 0 0 17.13 6.76L16.26 5.6A1.65 1.65 0 0 0 14.65 4H9.35A1.65 1.65 0 0 0 7.74 5.6L6.87 6.76A1.65 1.65 0 0 0 5.76 8.13L4.6 9A1.65 1.65 0 0 0 3 10.65V13.35A1.65 1.65 0 0 0 4.6 15L5.76 15.87A1.65 1.65 0 0 0 6.87 17.24L7.74 18.4A1.65 1.65 0 0 0 9.35 20H14.65A1.65 1.65 0 0 0 16.26 18.4L17.13 17.24A1.65 1.65 0 0 0 18.24 15.87L19.4 15Z" stroke="#fff" stroke-width="2"/>
+        </svg>
+      </button>
+      <div class="settings-menu" *ngIf="showMenu">
+        <button class="settings-option" (click)="setLang('es')" [class.selected]="lang === 'es'">Español</button>
+        <button class="settings-option" (click)="setLang('en')" [class.selected]="lang === 'en'">English</button>
+      </div>
+      <div class="navbar-backdrop" *ngIf="showMenu" (click)="onBackdropClick()"></div>
+    </div>
+  </nav>
+  <!-- Fixed Sidebar (Always Visible) -->
+  <aside class="sidebar fixed" [class.visible]="showFixedSidebar">
+    <div class="sidebar-header">
+      <img src="https://www.formula1.com/etc/designs/fom-website/images/f1_logo.svg" alt="F1 Logo" class="sidebar-logo" />
+      <h3 class="sidebar-title">F1 Tracker</h3>
+    </div>
+    <ul class="sidebar-menu">      <li *ngFor="let section of sidebarSections">
+        <a [routerLink]="section.route" routerLinkActive="active" (click)="goTo(section.route)">{{ section.label }}</a>
+      </li>
+    </ul>
+    <div class="sidebar-footer">
+      <div class="sidebar-stats">
+        <div class="stat-item">
+          <span class="stat-label">Equipos</span>
+          <span class="stat-value">{{ teamsInfo.length }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Pilotos</span>
+          <span class="stat-value">{{ driversInfo.length }}</span>
+        </div>
+      </div>
+      <div class="sidebar-copyright">
+        <p>Formula 1 © {{ today.getFullYear() }}</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Sidebar (Toggle) -->
+  <div class="sidebar-backdrop" *ngIf="sidebarOpen" (click)="closeSidebar()"></div>
+  <aside class="sidebar mobile" *ngIf="sidebarOpen">
+    <button class="close-sidebar" (click)="closeSidebar()" aria-label="Cerrar menú lateral">&times;</button>
+    <ul class="sidebar-menu">
+      <li *ngFor="let section of sidebarSections">
+        <a (click)="goTo(section.route)">{{ section.label }}</a>
+      </li>
+    </ul>
+  </aside>
+  
+  <!-- Mobile Floating Toggle Button -->
+  <button class="mobile-sidebar-toggle" (click)="toggleFixedSidebar()" aria-label="Toggle sidebar">
+    <svg *ngIf="!showFixedSidebar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 12h18M3 6h18M3 18h18"></path>
+    </svg>
+    <svg *ngIf="showFixedSidebar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 6L6 18M6 6l12 12"></path>
+    </svg>
+  </button>
+</div>
