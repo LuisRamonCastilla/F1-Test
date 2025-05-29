@@ -43,8 +43,7 @@ export class StandingsComponent implements OnInit {
     this.loadStandings();
   }
 
-  loadStandings() {
-    // Mock data for 2025 season standings
+  loadStandings() {    // Mock data for 2025 season standings - Complete driver list
     this.driverStandings = [
       {
         position: 1,
@@ -145,6 +144,106 @@ export class StandingsComponent implements OnInit {
         podiums: 0,
         country: 'Canada',
         countryCode: 'ca'
+      },
+      {
+        position: 11,
+        driver: 'Pierre Gasly',
+        team: 'Alpine',
+        points: 15,
+        wins: 0,
+        podiums: 0,
+        country: 'France',
+        countryCode: 'fr'
+      },
+      {
+        position: 12,
+        driver: 'Esteban Ocon',
+        team: 'Alpine',
+        points: 12,
+        wins: 0,
+        podiums: 0,
+        country: 'France',
+        countryCode: 'fr'
+      },
+      {
+        position: 13,
+        driver: 'Alex Albon',
+        team: 'Williams',
+        points: 10,
+        wins: 0,
+        podiums: 0,
+        country: 'Thailand',
+        countryCode: 'th'
+      },
+      {
+        position: 14,
+        driver: 'Nico Hülkenberg',
+        team: 'Haas',
+        points: 8,
+        wins: 0,
+        podiums: 0,
+        country: 'Germany',
+        countryCode: 'de'
+      },
+      {
+        position: 15,
+        driver: 'Yuki Tsunoda',
+        team: 'AlphaTauri',
+        points: 6,
+        wins: 0,
+        podiums: 0,
+        country: 'Japan',
+        countryCode: 'jp'
+      },
+      {
+        position: 16,
+        driver: 'Kevin Magnussen',
+        team: 'Haas',
+        points: 4,
+        wins: 0,
+        podiums: 0,
+        country: 'Denmark',
+        countryCode: 'dk'
+      },
+      {
+        position: 17,
+        driver: 'Valtteri Bottas',
+        team: 'Alfa Romeo',
+        points: 3,
+        wins: 0,
+        podiums: 0,
+        country: 'Finland',
+        countryCode: 'fi'
+      },
+      {
+        position: 18,
+        driver: 'Zhou Guanyu',
+        team: 'Alfa Romeo',
+        points: 2,
+        wins: 0,
+        podiums: 0,
+        country: 'China',
+        countryCode: 'cn'
+      },
+      {
+        position: 19,
+        driver: 'Logan Sargeant',
+        team: 'Williams',
+        points: 1,
+        wins: 0,
+        podiums: 0,
+        country: 'United States',
+        countryCode: 'us'
+      },
+      {
+        position: 20,
+        driver: 'Nyck de Vries',
+        team: 'AlphaTauri',
+        points: 0,
+        wins: 0,
+        podiums: 0,
+        country: 'Netherlands',
+        countryCode: 'nl'
       }
     ];
 
@@ -261,7 +360,6 @@ export class StandingsComponent implements OnInit {
   getFlagUrl(countryCode: string): string {
     return `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
   }
-
   getTeamColor(team: string): string {
     const teamColors: { [key: string]: string } = {
       'Red Bull Racing': '#0600EF',
@@ -276,5 +374,20 @@ export class StandingsComponent implements OnInit {
       'Alfa Romeo': '#900000'
     };
     return teamColors[team] || '#CCCCCC';
+  }
+  getTeamLogo(team: string): string {
+    const teamLogos: { [key: string]: string } = {
+      'Red Bull Racing': 'https://www.formula1.com/content/dam/fom-website/teams/2024/red-bull-racing-logo.png',
+      'McLaren': 'https://www.formula1.com/content/dam/fom-website/teams/2024/mclaren-logo.png',
+      'Ferrari': 'https://www.formula1.com/content/dam/fom-website/teams/2024/ferrari-logo.png',
+      'Mercedes': 'https://www.formula1.com/content/dam/fom-website/teams/2024/mercedes-logo.png',
+      'Aston Martin': 'https://www.formula1.com/content/dam/fom-website/teams/2024/aston-martin-logo.png',
+      'Alpine': 'https://www.formula1.com/content/dam/fom-website/teams/2024/alpine-logo.png',
+      'Williams': 'https://www.formula1.com/content/dam/fom-website/teams/2024/williams-logo.png',
+      'Haas': 'https://www.formula1.com/content/dam/fom-website/teams/2024/haas-logo.png',
+      'AlphaTauri': 'https://www.formula1.com/content/dam/fom-website/teams/2024/rb-logo.png',
+      'Alfa Romeo': 'https://www.formula1.com/content/dam/fom-website/teams/2024/kick-sauber-logo.png'
+    };
+    return teamLogos[team] || '';
   }
 }

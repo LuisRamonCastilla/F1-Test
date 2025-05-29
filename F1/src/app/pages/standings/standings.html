@@ -56,9 +56,12 @@
           <div class="flag">
             <img [src]="getFlagUrl(standing.countryCode)" [alt]="standing.country + ' flag'" class="flag-img">
           </div>
-          <div class="driver">{{ standing.driver }}</div>
-          <div class="team">
-            <div class="team-color" [style.background-color]="getTeamColor(standing.team)"></div>
+          <div class="driver">{{ standing.driver }}</div>          <div class="team">
+            <div class="team-logo-container">
+              <img [src]="getTeamLogo(standing.team)" [alt]="standing.team + ' logo'" class="team-logo" 
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block'">
+              <div class="team-color-fallback" [style.background-color]="getTeamColor(standing.team)" style="display: none;"></div>
+            </div>
             {{ standing.team }}
           </div>
           <div class="points">{{ standing.points }}</div>
@@ -89,9 +92,12 @@
           </div>
           <div class="flag">
             <img [src]="getFlagUrl(standing.countryCode)" [alt]="standing.country + ' flag'" class="flag-img">
-          </div>
-          <div class="constructor">
-            <div class="team-color" [style.background-color]="getTeamColor(standing.constructor)"></div>
+          </div>          <div class="constructor">
+            <div class="team-logo-container">
+              <img [src]="getTeamLogo(standing.constructor)" [alt]="standing.constructor + ' logo'" class="team-logo"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block'">
+              <div class="team-color-fallback" [style.background-color]="getTeamColor(standing.constructor)" style="display: none;"></div>
+            </div>
             {{ standing.constructor }}
           </div>
           <div class="drivers">
