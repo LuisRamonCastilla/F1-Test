@@ -1,0 +1,174 @@
+<!-- Wordle F1 Game Template -->
+<div class="wordle-f1-container">
+  <!-- Header -->
+  <div class="game-header">
+    <h1 class="game-title">🏎️ Wordle F1</h1>
+    <p class="game-subtitle">Adivina el piloto de Fórmula 1</p>
+    
+    <!-- Game Mode Toggle -->
+    <div class="game-mode-toggle">
+      <button 
+        class="mode-btn" 
+        [class.active]="gameMode === 'current'"
+        (click)="setGameMode('current')">
+        Pilotos 2025
+      </button>
+      <button 
+        class="mode-btn" 
+        [class.active]="gameMode === 'alltime'"
+        (click)="setGameMode('alltime')">
+        Históricos
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Board -->
+  <div class="game-board">
+    <!-- Search Input -->
+    <div class="search-container" *ngIf="gameState === 'active'">
+      <input 
+        type="text" 
+        class="driver-search"
+        placeholder="Busca un piloto..."
+        [(ngModel)]="searchTerm"
+        (input)="filterDrivers()"
+        [disabled]="gameState !== 'active'"
+        autocomplete="off">
+      
+      <!-- Filtered Drivers Dropdown -->
+      <div class="drivers-dropdown" *ngIf="filteredDrivers.length > 0 && searchTerm.length > 0">
+        <div 
+          class="driver-option" 
+          *ngFor="let driver of filteredDrivers" 
+          (click)="makeGuess(driver)">
+          <img [src]="driver.photo" [alt]="driver.name" class="driver-photo-small">
+          <span class="driver-name">{{ driver.name }}</span>
+          <span class="driver-team">{{ driver.team }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guesses Table Header -->
+    <div class="guesses-header" *ngIf="guesses.length > 0">
+      <div class="header-cell">Piloto</div>
+      <div class="header-cell">Equipo</div>
+      <div class="header-cell">País</div>
+      <div class="header-cell">Edad</div>
+      <div class="header-cell">Debut</div>
+      <div class="header-cell">Títulos</div>
+      <div class="header-cell">Victorias</div>
+    </div>
+
+    <!-- Guesses List -->
+    <div class="guesses-list">
+      <div 
+        class="guess-row" 
+        *ngFor="let guess of guesses; trackBy: trackByGuess"
+        [@slideIn]>
+        
+        <!-- Driver Name & Photo -->
+        <div class="guess-cell driver-cell" [class]="guess.nameMatch">
+          <img [src]="guess.driver.photo" [alt]="guess.driver.name" class="driver-photo">
+          <span class="driver-name">{{ guess.driver.name }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.nameMatch) }}</span>
+        </div>
+
+        <!-- Team -->
+        <div class="guess-cell" [class]="guess.teamMatch">
+          <span>{{ guess.driver.team }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.teamMatch) }}</span>
+        </div>
+
+        <!-- Nationality -->
+        <div class="guess-cell" [class]="guess.nationalityMatch">
+          <img [src]="guess.driver.flag" [alt]="guess.driver.nationality" class="flag-icon">
+          <span>{{ guess.driver.nationality }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.nationalityMatch) }}</span>
+        </div>
+
+        <!-- Age -->
+        <div class="guess-cell" [class]="guess.ageMatch">
+          <span>{{ guess.driver.age }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.ageMatch) }}</span>
+        </div>
+
+        <!-- First Year -->
+        <div class="guess-cell" [class]="guess.firstYearMatch">
+          <span>{{ guess.driver.firstYear }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.firstYearMatch) }}</span>
+        </div>
+
+        <!-- Championships -->
+        <div class="guess-cell" [class]="guess.championshipsMatch">
+          <span>{{ guess.driver.championships }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.championshipsMatch) }}</span>
+        </div>
+
+        <!-- Wins -->
+        <div class="guess-cell" [class]="guess.winsMatch">
+          <span>{{ guess.driver.wins }}</span>
+          <span class="feedback-icon">{{ getFeedbackIcon(guess.winsMatch) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Result -->
+    <div class="game-result" *ngIf="gameState !== 'active'">
+      <div class="result-content">
+        <h2 class="result-title" *ngIf="gameState === 'won'">
+          🎉 ¡Felicidades!
+        </h2>
+        <h2 class="result-title" *ngIf="gameState === 'over'">
+          😔 ¡Mejor suerte la próxima vez!
+        </h2>
+          <div class="target-driver">
+          <img [src]="targetDriver?.photo" [alt]="targetDriver?.name" class="target-driver-photo">
+          <div class="target-driver-info">
+            <h3>{{ targetDriver?.name }}</h3>
+            <p>{{ targetDriver?.team }} • {{ targetDriver?.nationality }}</p>
+            <p>{{ targetDriver?.age }} años • Debut: {{ targetDriver?.firstYear }}</p>
+            <p>{{ targetDriver?.championships }} títulos • {{ targetDriver?.wins }} victorias</p>
+          </div>
+        </div>
+
+        <div class="result-stats">
+          <p *ngIf="gameState === 'won'">
+            ¡Acertaste en {{ guesses.length }} {{ guesses.length === 1 ? 'intento' : 'intentos' }}!
+          </p>          <p *ngIf="gameState === 'over'">
+            El piloto era <strong>{{ targetDriver?.name }}</strong>
+          </p>
+        </div>
+
+        <div class="result-actions">
+          <button class="action-btn primary" (click)="newGame()">
+            🎮 Nuevo Juego
+          </button>
+          <button class="action-btn secondary" (click)="shareResult()">
+            📤 Compartir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Attempts Counter -->
+    <div class="attempts-counter" *ngIf="gameState === 'active'">
+      Intentos: {{ guesses.length }}/{{ maxGuesses }}
+    </div>
+  </div>
+
+  <!-- Game Instructions -->
+  <div class="game-instructions">
+    <h3>📖 Cómo jugar</h3>
+    <ul>
+      <li>🎯 Adivina el piloto de Fórmula 1 del día</li>
+      <li>🔍 Busca y selecciona un piloto</li>
+      <li>📊 Usa las pistas de color para acercarte:</li>
+      <li class="color-guide">
+        <span class="correct">🟢 Correcto</span>
+        <span class="partial">🟡 Cerca</span>
+        <span class="wrong">🔴 Incorrecto</span>
+      </li>
+      <li>🏁 Tienes {{ maxGuesses }} intentos para acertar</li>
+    </ul>
+  </div>
+</div>
