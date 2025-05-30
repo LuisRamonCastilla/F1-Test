@@ -37,9 +37,12 @@
     <ul class="sidebar-menu">      <li *ngFor="let section of sidebarSections">
         <a [routerLink]="section.route" routerLinkActive="active" (click)="goTo(section.route)">{{ section.label }}</a>
       </li>
-    </ul>
-    <div class="sidebar-footer">
+    </ul>    <div class="sidebar-footer">
       <div class="sidebar-stats">
+        <div class="stat-item">
+          <span class="stat-label">Carreras 2025</span>
+          <span class="stat-value">{{ completedRaces }}/{{ totalRaces }}</span>
+        </div>
         <div class="stat-item">
           <span class="stat-label">Equipos</span>
           <span class="stat-value">{{ teamsInfo.length }}</span>

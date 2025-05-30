@@ -635,11 +635,264 @@ export class CalendarComponent implements OnInit {
       ]
     };
 
-    this.results = mockResults[gpId] || [];
-  }  loadHistoricalResults(gpId: number) {
+    this.results = mockResults[gpId] || [];  }
+
+  loadHistoricalResults(gpId: number) {
     // Simulamos resultados históricos de los últimos 4 años
     const mockHistoricalResults: { [key: number]: HistoricalResult[] } = {
-      7: [ // Monaco - para circuitos futuros mostramos histórico
+      1: [ // Bahrain
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 2, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Kevin Magnussen', team: 'Haas' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        }
+      ],
+      2: [ // Saudi Arabia
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Esteban Ocon', team: 'Alpine' },
+            { position: 5, driver: 'Lando Norris', team: 'McLaren' }
+          ]
+        }
+      ],
+      3: [ // Australia
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Lance Stroll', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Lando Norris', team: 'McLaren' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Lando Norris', team: 'McLaren' }
+          ]
+        }
+      ],
+      4: [ // China
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'Lance Stroll', team: 'Aston Martin' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
+          ]
+        }
+      ],
+      5: [ // Miami
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        }
+      ],
+      6: [ // Emilia-Romagna (Imola)
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Valtteri Bottas', team: 'Alfa Romeo' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        }
+      ],
+      7: [ // Monaco
         {
           year: 2024,
           top5: [
@@ -679,8 +932,7 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
             { position: 5, driver: 'Sebastian Vettel', team: 'Aston Martin' }
           ]
-        }
-      ],
+        }      ],
       8: [ // Canada
         {
           year: 2024,
@@ -701,7 +953,26 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
             { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
           ]
-        }
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Sebastian Vettel', team: 'Aston Martin' }
+          ]        }
       ],
       12: [ // Hungary
         {
@@ -712,6 +983,36 @@ export class CalendarComponent implements OnInit {
             { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
             { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
             { position: 5, driver: 'Max Verstappen', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Oscar Piastri', team: 'McLaren' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Esteban Ocon', team: 'Alpine' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Fernando Alonso', team: 'Alpine' },
+            { position: 5, driver: 'Pierre Gasly', team: 'AlphaTauri' }
           ]
         }
       ],
@@ -725,6 +1026,36 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
             { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
           ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Daniel Ricciardo', team: 'McLaren' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
         }
       ],
       17: [ // Singapore
@@ -737,8 +1068,39 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'George Russell', team: 'Mercedes' },
             { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
           ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Pierre Gasly', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'Daniel Ricciardo', team: 'McLaren' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
         }
-      ],      18: [ // Japan
+      ],
+      18: [ // Japan
         {
           year: 2024,
           top5: [
@@ -790,6 +1152,36 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'George Russell', team: 'Mercedes' },
             { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
           ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'George Russell', team: 'Mercedes' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Pierre Gasly', team: 'AlphaTauri' }
+          ]
         }
       ],
       23: [ // Las Vegas
@@ -801,6 +1193,36 @@ export class CalendarComponent implements OnInit {
             { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
             { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
             { position: 5, driver: 'Max Verstappen', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 3, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
           ]
         }
       ],
@@ -814,8 +1236,413 @@ export class CalendarComponent implements OnInit {
             { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
             { position: 5, driver: 'George Russell', team: 'Mercedes' }
           ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Yuki Tsunoda', team: 'AlphaTauri' },
+            { position: 5, driver: 'Pierre Gasly', team: 'AlphaTauri' }
+          ]        }
+      ],
+      9: [ // Spain
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
         }
-      ]    };
+      ],
+      10: [ // Austria
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'George Russell', team: 'Mercedes' },
+            { position: 2, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Max Verstappen', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Esteban Ocon', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        }
+      ],
+      11: [ // Great Britain
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'Daniel Ricciardo', team: 'McLaren' }
+          ]
+        }
+      ],
+      13: [ // Belgium
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 2, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'George Russell', team: 'Williams' },
+            { position: 3, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 4, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        }
+      ],
+      14: [ // Netherlands
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 5, driver: 'Fernando Alonso', team: 'Aston Martin' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'George Russell', team: 'Mercedes' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Sergio Pérez', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Valtteri Bottas', team: 'Mercedes' },
+            { position: 4, driver: 'Pierre Gasly', team: 'AlphaTauri' },
+            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }
+          ]
+        }
+      ],
+      16: [ // Azerbaijan
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'Max Verstappen', team: 'Red Bull Racing' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Fernando Alonso', team: 'Aston Martin' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 3, driver: 'George Russell', team: 'Mercedes' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'Pierre Gasly', team: 'AlphaTauri' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Sebastian Vettel', team: 'Aston Martin' },
+            { position: 3, driver: 'Pierre Gasly', team: 'AlphaTauri' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Lando Norris', team: 'McLaren' }
+          ]
+        }
+      ],
+      19: [ // Qatar
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Pierre Gasly', team: 'Alpine' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Oscar Piastri', team: 'McLaren' },
+            { position: 3, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Lewis Hamilton', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 2, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 3, driver: 'Fernando Alonso', team: 'Alpine' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'Esteban Ocon', team: 'Alpine' }
+          ]
+        }
+      ],
+      20: [ // United States
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 2, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 3, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        }
+      ],
+      21: [ // Mexico
+        {
+          year: 2024,
+          top5: [
+            { position: 1, driver: 'Carlos Sainz', team: 'Ferrari' },
+            { position: 2, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2023,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Charles Leclerc', team: 'Ferrari' },
+            { position: 4, driver: 'Lando Norris', team: 'McLaren' },
+            { position: 5, driver: 'George Russell', team: 'Mercedes' }
+          ]
+        },
+        {
+          year: 2022,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'George Russell', team: 'Mercedes' },
+            { position: 5, driver: 'Carlos Sainz', team: 'Ferrari' }
+          ]
+        },
+        {
+          year: 2021,
+          top5: [
+            { position: 1, driver: 'Max Verstappen', team: 'Red Bull Racing' },
+            { position: 2, driver: 'Lewis Hamilton', team: 'Mercedes' },
+            { position: 3, driver: 'Sergio Pérez', team: 'Red Bull Racing' },
+            { position: 4, driver: 'Pierre Gasly', team: 'AlphaTauri' },            { position: 5, driver: 'Charles Leclerc', team: 'Ferrari' }          ]
+        }
+      ]
+    };
 
     this.allHistoricalResults = mockHistoricalResults[gpId] || [];
     this.historicalResults = [...this.allHistoricalResults];

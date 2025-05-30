@@ -26,9 +26,15 @@
 
 .standings-header {
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.header-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -329,4 +335,56 @@
     padding: 0.6rem 1rem;
     font-size: 0.85rem;
   }
+}
+
+.year-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.year-dropdown {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.8rem;
+  color: #fff;
+  padding: 0.7rem 2.5rem 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+.year-dropdown:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 65, 108, 0.5);
+}
+
+.year-dropdown:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ff416c;
+  box-shadow: 0 0 0 3px rgba(255, 65, 108, 0.2);
+}
+
+.year-dropdown option {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.year-dropdown:hover + .dropdown-icon {
+  color: #fff;
 }

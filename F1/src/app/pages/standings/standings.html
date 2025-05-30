@@ -1,7 +1,19 @@
 <div class="page-transition-wrapper">
-  <div class="standings-container">
-    <div class="standings-header">
-      <h2 class="standings-title">Clasificación Mundial 2025</h2>
+  <div class="standings-container">    <div class="standings-header">
+      <div class="header-top">
+        <h2 class="standings-title">Clasificación Mundial {{ selectedYear }}</h2>
+        <div class="year-selector">
+          <select 
+            class="year-dropdown"
+            [(ngModel)]="selectedYear"
+            (change)="selectYear($event)">
+            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+          </select>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="dropdown-icon">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
       <div class="view-selector">
         <button 
           class="view-btn" 
