@@ -30,10 +30,10 @@ interface GameGuess {
   nameMatch: 'correct' | 'wrong';
   teamMatch: 'correct' | 'wrong';
   nationalityMatch: 'correct' | 'wrong';
-  ageMatch: 'correct' | 'partial' | 'wrong';
-  firstYearMatch: 'correct' | 'partial' | 'wrong';
-  championshipsMatch: 'correct' | 'partial' | 'wrong';
-  winsMatch: 'correct' | 'partial' | 'wrong';
+  ageMatch: 'correct' | 'higher' | 'lower';
+  firstYearMatch: 'correct' | 'higher' | 'lower';
+  championshipsMatch: 'correct' | 'higher' | 'lower';
+  winsMatch: 'correct' | 'higher' | 'lower';
 }
 
 @Component({
@@ -347,18 +347,16 @@ export class DriversComponent implements OnInit {
     };
   }
 
-  compareNumbers(guess: number, target: number): 'correct' | 'partial' | 'wrong' {
+  compareNumbers(guess: number, target: number): 'correct' | 'higher' | 'lower' {
     if (guess === target) return 'correct';
-    // For partial feedback, show if the guess is within a certain range
-    const diff = Math.abs(guess - target);
-    if (diff <= 2) return 'partial'; // Close values
-    return 'wrong';
+    return guess < target ? 'higher' : 'lower';
   }
 
   getFeedbackIcon(feedback: string): string {
     switch (feedback) {
       case 'correct': return '✓';
-      case 'partial': return '~';
+      case 'higher': return '⬆';
+      case 'lower': return '⬇';
       default: return '✗';
     }
   }
