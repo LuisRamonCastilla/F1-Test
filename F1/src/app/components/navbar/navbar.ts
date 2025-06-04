@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,8 +31,12 @@ export class Navbar implements OnInit {  showMenu = false;
   ];
   @Output() langChange = new EventEmitter<'es' | 'en'>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,
+              private langService: LanguageService) {
+    this.lang = this.langService.currentLang;
+  }
   ngOnInit() {
+    this.langService.lang$.subscribe(l => (this.lang = l));
     this.http.get('https://api.openf1.org/v1/teams').subscribe(data => this.teamsInfo = data as any[]);
     this.http.get('https://api.openf1.org/v1/drivers').subscribe(data => this.driversInfo = data as any[]);
     this.http.get('https://api.openf1.org/v1/sessions').subscribe(data => this.calendar = data as any[]);
@@ -82,7 +87,7 @@ export class Navbar implements OnInit {  showMenu = false;
   }
 
   setLang(lang: 'es' | 'en') {
-    this.lang = lang;
+    this.langService.setLang(lang);
     this.langChange.emit(lang);
     this.showMenu = false;
   }

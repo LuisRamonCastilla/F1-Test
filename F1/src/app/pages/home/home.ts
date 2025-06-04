@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TeamList } from '../../components/team-list/team-list';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { TeamList } from '../../components/team-list/team-list';
 export class Home {
   lang: 'es' | 'en' = 'es';
 
-  // This will now be coordinated with app-level language settings
-  // The language change is managed by the navbar component
+  constructor(private langService: LanguageService) {
+    this.lang = this.langService.currentLang;
+    this.langService.lang$.subscribe(l => (this.lang = l));
+  }
 }
