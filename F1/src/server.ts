@@ -6,11 +6,30 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import mysql from 'mysql2/promise';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+const dbPromise = mysql.createPool({
+  host: process.env['MYSQL_HOST'] || 'localhost',
+  user: process.env['MYSQL_USER'] || 'root',
+  password: process.env['MYSQL_PASSWORD'] || 'password',
+  database: process.env['MYSQL_DATABASE'] || 'f1',
+});
+
+app.get('/api/drivers', async (_req, res) => {
+  try {
+    const db = await dbPromise.getConnection();
+    const [rows] = await db.query('SELECT * FROM drivers');
+    db.release();
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch drivers' });
+  }
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
