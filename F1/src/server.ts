@@ -31,6 +31,80 @@ app.get('/api/drivers', async (_req, res) => {
   }
 });
 
+app.get('/api/teams', async (_req, res) => {
+  try {
+    const db = await dbPromise.getConnection();
+    const [rows] = await db.query('SELECT * FROM teams');
+    db.release();
+    const teams = (rows as any[]).map((r) => ({
+      id: r.id,
+      name: r.name,
+      nameEn: r.name_en,
+      logo: r.logo,
+      car: r.car,
+      drivers: JSON.parse(r.drivers_json || '[]'),
+    }));
+    res.json(teams);
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch teams' });
+  }
+});
+
+app.get('/api/calendar', async (_req, res) => {
+  try {
+    const db = await dbPromise.getConnection();
+    const [rows] = await db.query('SELECT * FROM calendar ORDER BY date');
+    db.release();
+    const calendar = (rows as any[]).map((r) => ({
+      id: r.id,
+      name: r.name,
+      country: r.country,
+      countryCode: r.country_code,
+      location: r.location,
+      date: r.date,
+      circuit: r.circuit,
+      sessions: JSON.parse(r.sessions_json || '[]'),
+      isPast: !!r.is_past,
+      hasResults: !!r.has_results,
+    }));
+    res.json(calendar);
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch calendar' });
+  }
+});
+
+app.get('/api/standings/drivers', async (_req, res) => {
+  try {
+    const db = await dbPromise.getConnection();
+    const [rows] = await db.query('SELECT * FROM driver_standings ORDER BY position');
+    db.release();
+    res.json(rows);
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch standings' });
+  }
+});
+
+app.get('/api/standings/constructors', async (_req, res) => {
+  try {
+    const db = await dbPromise.getConnection();
+    const [rows] = await db.query('SELECT * FROM constructor_standings ORDER BY position');
+    db.release();
+    const data = (rows as any[]).map((r) => ({
+      position: r.position,
+      constructor: r.constructor,
+      points: r.points,
+      wins: r.wins,
+      podiums: r.podiums,
+      country: r.country,
+      countryCode: r.country_code,
+      drivers: JSON.parse(r.drivers_json || '[]'),
+    }));
+    res.json(data);
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch standings' });
+  }
+});
+
 /**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
