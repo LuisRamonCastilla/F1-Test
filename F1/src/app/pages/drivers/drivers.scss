@@ -218,14 +218,9 @@
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
   }
   
-  &.partial {
-    background: linear-gradient(135deg, #FF9800, #f57c00);
-    color: white;
-    border-color: #FF9800;
-    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
-  }
-  
-  &.wrong {
+  &.wrong,
+  &.higher,
+  &.lower {
     background: linear-gradient(135deg, #f44336, #d32f2f);
     color: white;
     border-color: #f44336;
@@ -410,12 +405,9 @@
             color: white;
           }
           
-          &.partial {
-            background: #FF9800;
-            color: white;
-          }
-          
-          &.wrong {
+          &.wrong,
+          &.higher,
+          &.lower {
             background: #f44336;
             color: white;
           }

@@ -12,6 +12,13 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+### Mini-game hints
+
+In the Wordle F1 mini-game, incorrect numeric guesses show an arrow instead of an `X`:
+
+- `⬆` means the real value is higher than your guess.
+- `⬇` means the real value is lower.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
